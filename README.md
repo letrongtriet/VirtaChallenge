@@ -1,4 +1,4 @@
-# Compensate
+# Virta Challenge
 
 ## Application architecture
 Application is built base on MVVM-C + Dependencies Injection architecture to respect SOLID principle (ModelViewViewModel-Coordinator)
