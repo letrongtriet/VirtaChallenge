@@ -1,5 +1,9 @@
 # Virta Challenge
 
+## Demo
+![](Demo.gif)
+![](Demo2.gif)
+
 ## Application architecture
 Application is built base on MVVM-C + Dependencies Injection architecture to respect SOLID principle (ModelViewViewModel-Coordinator)
 
@@ -34,6 +38,3 @@ Application is built base on MVVM-C + Dependencies Injection architecture to res
 3. Choose your preferred simulator
 4. Run application
 5. Enjoy!
-
-## Demo
-![](Demo.gif)
