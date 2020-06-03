@@ -35,12 +35,7 @@ class RootCoordinator: Coordinator {
     
     // MARK: - Private methods
     private func openMapForPlace(location: CLLocationCoordinate2D, locationName: String) {
-        let regionDistance: CLLocationDistance = 100
-        let regionSpan = MKCoordinateRegion(center: location, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
-        let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
-        ]
+        let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         let placemark = MKPlacemark(coordinate: location, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = locationName
