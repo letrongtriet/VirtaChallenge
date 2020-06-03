@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AppCoordinator: Coordinator {
     
@@ -17,12 +18,19 @@ class AppCoordinator: Coordinator {
     
     private var networkManager: APIRequest
     
+    private var locationManager: CLLocationManager
+    
     init(window: UIWindow) {
         self.window = window
         self.networkManager = APIRequest()
+        self.locationManager = CLLocationManager()
     }
     
     func start() {
+        requestForLocationService()
+        
+        window.overrideUserInterfaceStyle = .light
+        
         if UserDefaults.standard.bool(forKey: AppPantry.UserPersistentKey.didLogin),
             let tokenExpireTime = UserDefaults.standard.value(forKey: AppPantry.UserPersistentKey.tokenExpireTime) as? Date,
             tokenExpireTime > Date() {
@@ -30,6 +38,14 @@ class AppCoordinator: Coordinator {
             showRoot()
         } else {
             showLogin()
+        }
+    }
+    
+    private func requestForLocationService() {
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
     }
     

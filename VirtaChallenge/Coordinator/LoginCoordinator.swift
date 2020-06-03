@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol LoginCoordinatorDelegate: class {
     func loginCoordinatorDidFinish()

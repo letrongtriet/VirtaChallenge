@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class RootViewController: UIViewController {
     
@@ -64,7 +65,7 @@ class RootViewController: UIViewController {
         collectionView.dataSource = self
         
         collectionView.refreshControl = refreshControl
-                
+        
         return collectionView
     }()
     
@@ -80,10 +81,15 @@ class RootViewController: UIViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
+    // MARK: - Private methods
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.93, green: 0.94, blue: 0.95, alpha: 1.00)
         
@@ -147,7 +153,15 @@ class RootViewController: UIViewController {
     @objc private func refresh() {
         viewModel.getStations()
     }
-
+    
+    private func didTapCell(at indexPath: IndexPath) {
+        viewModel.didTapCell(at: indexPath)
+    }
+    
+    private func didTapDirection(location: CLLocationCoordinate2D, locationName: String) {
+        viewModel.didTapDirection(location: location, locationName: locationName)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -163,32 +177,39 @@ extension RootViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StationCollectionViewCell", for: indexPath) as? StationCollectionViewCell else { return UICollectionViewCell() }
-        
         cell.evse = stations[indexPath.section].evses[indexPath.row]
-        cell.updateUI()
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "StationHeaderView", for: indexPath) as? StationHeaderView else { return UICollectionReusableView() }
-        guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "StationFooterView", for: indexPath) as? StationFooterView else { return UICollectionReusableView() }
-        
-        if kind == UICollectionView.elementKindSectionHeader {
-            headerView.station = stations[indexPath.section]
-            headerView.updateUI()
-
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "StationHeaderView", for: indexPath) as! StationHeaderView
+            
+            let station = stations[indexPath.section]
+            headerView.station = station
+            
+            headerView.didTapDirection = { [weak self] location in
+                self?.didTapDirection(location: CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude), locationName: station.name)
+            }
+            
+            headerView.didTapCell = { [weak self] _ in
+                self?.didTapCell(at: indexPath)
+            }
+            
             return headerView
+            
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "StationFooterView", for: indexPath) as! StationFooterView
+            return footerView
+            
+        default:
+            assert(false, "Unexpected element kind")
         }
-        
-        return footerView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewController = StationDetailViewController()
-        viewController.modalPresentationStyle = .overCurrentContext
-        viewController.modalTransitionStyle = .crossDissolve
-        present(viewController, animated: true, completion: nil)
+        didTapCell(at: indexPath)
     }
     
 }

@@ -11,7 +11,11 @@ import UIKit
 class StationCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Dependencies
-    var evse: Evse?
+    var evse: Evse?  {
+        didSet {
+            updateUI()
+        }
+    }
     
     // MARK: - Private properties
     private lazy var connectorIcon: UIImageView = {
@@ -94,7 +98,7 @@ class StationCollectionViewCell: UICollectionViewCell {
         
         return stackView
     }()
-            
+    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)

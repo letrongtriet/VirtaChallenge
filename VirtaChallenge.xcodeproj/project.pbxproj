@@ -33,6 +33,7 @@
 		25740FB3248794D50081426B /* StationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25740FB2248794D50081426B /* StationFooterView.swift */; };
 		25740FB524879A710081426B /* StationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25740FB424879A710081426B /* StationDetailViewModel.swift */; };
 		25740FB724879D210081426B /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25740FB624879D210081426B /* StationDetailViewController.swift */; };
+		25740FBB2487B7B30081426B /* StationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25740FBA2487B7B30081426B /* StationDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		25740FB2248794D50081426B /* StationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFooterView.swift; sourceTree = "<group>"; };
 		25740FB424879A710081426B /* StationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewModel.swift; sourceTree = "<group>"; };
 		25740FB624879D210081426B /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		25740FBA2487B7B30081426B /* StationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,23 +98,17 @@
 		25740F6524864C900081426B /* VirtaChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				25740F9D2486B1CC0081426B /* View */,
-				25740F9A248683C60081426B /* ViewModel */,
-				25740F912486810C0081426B /* Coordinator */,
-				25740F88248653E80081426B /* Model */,
 				25740F6624864C900081426B /* AppDelegate.swift */,
 				25740F81248651FA0081426B /* AppPantry.swift */,
 				25740F6F24864C910081426B /* Assets.xcassets */,
 				25740F7124864C910081426B /* LaunchScreen.storyboard */,
 				25740F7424864C910081426B /* Info.plist */,
+				25740F88248653E80081426B /* Model */,
+				25740F9D2486B1CC0081426B /* View */,
+				25740F9A248683C60081426B /* ViewModel */,
+				25740F912486810C0081426B /* Coordinator */,
 				25740F7A24864EB00081426B /* Network */,
 				25740F832486524E0081426B /* Extensions */,
-				25740F8D248656330081426B /* LoginViewController.swift */,
-				25740FA22486C1280081426B /* RootViewController.swift */,
-				25740FAE24878D080081426B /* StationCollectionViewCell.swift */,
-				25740FB024878E0D0081426B /* StationHeaderView.swift */,
-				25740FB2248794D50081426B /* StationFooterView.swift */,
-				25740FB624879D210081426B /* StationDetailViewController.swift */,
 			);
 			path = VirtaChallenge;
 			sourceTree = "<group>";
@@ -171,8 +167,39 @@
 		25740F9D2486B1CC0081426B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				25740FBC2487E22A0081426B /* Login */,
+				25740FBD2487E2330081426B /* Main */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		25740FBC2487E22A0081426B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				25740F8D248656330081426B /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		25740FBD2487E2330081426B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				25740FA22486C1280081426B /* RootViewController.swift */,
+				25740FB624879D210081426B /* StationDetailViewController.swift */,
+				25740FBE2487E2400081426B /* Subview */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		25740FBE2487E2400081426B /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				25740FAE24878D080081426B /* StationCollectionViewCell.swift */,
+				25740FB024878E0D0081426B /* StationHeaderView.swift */,
+				25740FB2248794D50081426B /* StationFooterView.swift */,
+				25740FBA2487B7B30081426B /* StationDetailTableViewCell.swift */,
+			);
+			path = Subview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25740FBB2487B7B30081426B /* StationDetailTableViewCell.swift in Sources */,
 				25740FB724879D210081426B /* StationDetailViewController.swift in Sources */,
 				25740F8C248654CF0081426B /* Token.swift in Sources */,
 				25740F85248652610081426B /* QOSUtilities.swift in Sources */,
@@ -415,7 +443,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = letrongtriet.VirtaChallenge.VirtaChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -434,7 +462,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = letrongtriet.VirtaChallenge.VirtaChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

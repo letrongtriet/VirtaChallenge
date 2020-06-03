@@ -118,6 +118,10 @@ class LoginViewController: UIViewController {
         codeTextField.addBottomBorder()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
